@@ -1,0 +1,21 @@
+# Node modules
+node_modules
+
+# OS-specific files
+.DS_Store
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Debugger configurations
+.vscode/
+
+# Build output
+dist/
+build/
+
+# Miscellaneous
+projectPlan.txt
