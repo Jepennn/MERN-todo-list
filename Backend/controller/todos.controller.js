@@ -19,7 +19,7 @@ const getTodos = async (req, res) => {
 const createTodo = async (req, res) => {
   const todo = req.body; // Data that user sends in the request
 
-  if (!todo.body || !todo.status) {
+  if (!todo.body || !todo.status == undefined) {
     return res
       .status(400)
       .json({ message: "Please fill in all the required fields" });
@@ -53,9 +53,11 @@ const updateTodo = async (req, res) => {
 
 // Delete a todo
 const deleteTodo = async (req, res) => {
+  const { id } = req.params; // takes the parameters in the url
   try {
-    res.json({ message: "Deleted a todo" });
-  } catch {
+    const deletedTodo = await Todo.findByIdAndDelete(id); //find the todo by id and delete it
+    res.status(200).json({ succes: true, data: deletedTodo });
+  } catch (error) {
     res.status(500).json({ succes: false, message: error.message });
   }
 };
