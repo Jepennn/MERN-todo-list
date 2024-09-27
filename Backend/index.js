@@ -1,8 +1,7 @@
 import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import { connectDB } from "./db.js";
-import { Todo } from "./model/todos.model.js";
 import {
   getTodos,
   createTodo,
@@ -14,6 +13,7 @@ dotenv.config(); //load env variables
 
 const app = express();
 app.use(express.json()); //middleware to parse json data so that it can be used in the req.body
+app.use(cors()); //middleware to allow cross-origin requests
 
 const port = process.env.PORT || 3000;
 connectDB()
