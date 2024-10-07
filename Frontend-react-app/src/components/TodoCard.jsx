@@ -1,13 +1,18 @@
+import PropTypes from "prop-types";
 import styles from "./TodoCard.module.css";
 import { CiCircleCheck } from "react-icons/ci";
 
-function TodoCard() {
+function TodoCard({ todoBody }) {
   return (
     <div className={styles.todoCard}>
       <CiCircleCheck className={styles.icon} />
-      <p className={styles.description}>Det här är min första todo</p>
+      <p className={styles.description}>{todoBody}</p>
     </div>
   );
 }
+
+TodoCard.propTypes = {
+  todoBody: PropTypes.string.isRequired,
+};
 
 export default TodoCard;
