@@ -1,8 +1,18 @@
 :root {
-  --primary-color: #00db71;
+  --primary-color: #06a5fb;
   --secondary-color: #6233b9;
-  --background-color: #393939;
+  --background-color: rgb(0, 14, 46);
   --text-color: #eadbfb;
   --button-hover-color: #23014a;
   --button-background-color: #34036c;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }

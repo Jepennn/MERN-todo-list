@@ -1,15 +1,13 @@
-import TodoComponent from "./components/TodoComponent";
-import NavBar from "./components/NavBar";
+import TodoCardList from "./components/TodoCardList";
 import styles from "./App.module.css";
 import NewTodo from "./components/NewTodo";
 import MainHeader from "./components/Mainheader";
 
 function App() {
   return (
-    <div className={styles.container}>
+    <div className={styles.app}>
       <MainHeader />
-      {/* <NavBar /> */}
-      <TodoComponent />
+      <TodoCardList />
       <NewTodo />
     </div>
   );

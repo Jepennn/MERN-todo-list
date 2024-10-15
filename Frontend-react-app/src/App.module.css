@@ -1,13 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Grundläggande stil för body */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #393939;
+.app {
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
