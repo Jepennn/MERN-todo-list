@@ -30,10 +30,11 @@
   cursor: pointer;
   font-weight: bold;
 }
-.todoIcon {
-  color: var(--primary-color);
+
+.addIcon {
+  color: var(--background-color);
 }
 
 .button:hover {
-  background-color: #00db71b0;
+  background-color: #06a5fbc1;
 }

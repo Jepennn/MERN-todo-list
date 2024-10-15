@@ -11,7 +11,7 @@ function MainHeader() {
       </h1>
       <p>
         <button className={styles.button}>
-          <MdPostAdd size={18} />
+          <MdPostAdd size={18} className={styles.addIcon} />
           New Post
         </button>
       </p>
