@@ -1,33 +1,44 @@
-.form {
-  background-color: var(--primary-color);
-  opacity: 0.8;
-  padding: 1rem;
-  width: 20rem;
-  margin: auto;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
 .container {
   display: flex;
   justify-content: center;
+  padding-top: 1.5rem;
 }
 
-.form label {
-  display: block;
-  margin-bottom: 0.2rem;
-  color: var(--background-color);
-  font-weight: bold;
-  font-size: 1.5rem;
+.form {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--button-backround-color);
+  width: 50%;
+  background-color: var(--background-color);
+  border-radius: 25px;
 }
 
-.form textarea {
-  display: block;
+.inputForm,
+.buttonForm {
+  outline: none;
+  border: solid 2px var(--border-color);
+  padding: 5px 20px;
+  color: var(--text-color);
+  background-color: rgba(17, 25, 40, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  height: 50px;
+  border-radius: 25px;
+}
+
+.inputForm {
   width: 100%;
-  margin-bottom: 1rem;
-  padding: 0.3rem;
-  border-radius: 6px;
-  border: none;
-  background-color: #ffffff;
-  color: #303031;
+  height: 50px;
+  border-radius: 25px;
+  margin-right: 1rem;
+}
+
+.buttonForm {
+  background-color: var(--button-backround-color);
+  color: #2a2630;
+}
+
+.buttonForm:hover {
+  background-color: var(--button-hover-color);
+  transform: translateY(-2px);
+  cursor: pointer;
 }
