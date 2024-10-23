@@ -1,10 +1,11 @@
 :root {
-  --primary-color: #06a5fb;
-  --secondary-color: #6233b9;
   --background-color: rgb(0, 14, 46);
-  --text-color: #eadbfb;
+  --text-color: #cccccc;
   --button-hover-color: #23014a;
-  --button-background-color: #34036c;
+  --button-text-color: #2a2630;
+  --button-backround-color: #06a5fb;
+  --button-hover-color: #06a5fbc1;
+  --border-color: rgba(255, 255, 255, 0.125);
 }
 * {
   margin: 0;
