@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import TodoCard from "./TodoCard";
 import styles from "./TodoCardList.module.css";
+import PropTypes from "prop-types";
 
-function TodoCardList() {
+function TodoCardList({ updateFlag, refreshTodoList }) {
   const [todos, setTodos] = useState([]);
 
   // useEffect gets called after the first render an get all todos from the server
@@ -18,15 +19,27 @@ function TodoCardList() {
     };
 
     fetchTodos();
-  }, []); // Tom beroendelista
+  }, [updateFlag]); //Update flag är ett state som uppdateras i NewTodo-komponenten när en ny todo skapas
 
+  //Här bygger vi våran lista med todos
   return (
     <div className={styles.gridContainer}>
       {todos.map((todo) => (
-        <TodoCard key={todo._id} todoBody={todo.body} />
+        <TodoCard
+          key={todo._id}
+          refreshTodoList={refreshTodoList}
+          todoBody={todo.body}
+          todoId={todo._id}
+          todoStatus={todo.status}
+        />
       ))}
     </div>
   );
 }
+
+TodoCardList.propTypes = {
+  updateFlag: PropTypes.bool,
+  refreshTodoList: PropTypes.func,
+};
 
 export default TodoCardList;
