@@ -23,7 +23,7 @@ const todoSchema = new Schema(
     },
     priority: {
       type: String,
-      enum: ["low", "medium", "high"],
+      enum: ["Low", "Medium", "High"],
       default: "medium",
     },
   },
