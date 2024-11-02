@@ -4,18 +4,29 @@ import PropTypes from "prop-types";
 
 function NewTodo({ refreshTodoList }) {
   const [task, setTask] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [priority, setPriority] = useState("Medium");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    //Förhindrar att skicka tomma Todos
+    if (task.trim() == "") {
+      console.log("Vi kan inte skicka tomma todos");
+      setTask("");
+      return 0;
+    }
 
     //Bygger vårt todo objekt som ska skickas till DB
     const todoObject = {
       body: task,
       status: false,
       date: new Date(),
-      dueDate: new Date(),
-      priority: "medium",
+      dueDate: new Date(dueDate),
+      priority: priority,
     };
+
+    console.log(todoObject);
 
     //Funktion som skickar todoObject till databasen
     const sendTodoToDB = async () => {
@@ -35,6 +46,8 @@ function NewTodo({ refreshTodoList }) {
 
         refreshTodoList(); //Värdelös funktion som tvingar TodoCardList att uppdatera sig
         setTask(""); // Rensar inputfältet
+        setDueDate(""); // Rensar inputfältet
+        setPriority("M"); // Rensar inputfältet
       } catch (error) {
         console.error("Error:", error);
       }
@@ -46,16 +59,40 @@ function NewTodo({ refreshTodoList }) {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <input
-          type="text"
-          placeholder="Add your todo"
-          value={task}
-          className={styles.inputForm}
-          onChange={(e) => setTask(e.target.value)}
-        />
-        <button className={styles.buttonForm}>
-          <h4>ADD</h4>
-        </button>
+        <div className={styles.upperInputDiv}>
+          <input
+            type="text"
+            placeholder="Add your todo"
+            value={task}
+            className={styles.inputFormText}
+            onChange={(e) => setTask(e.target.value)}
+          />
+          <button className={styles.buttonForm}>
+            <h4>ADD</h4>
+          </button>
+        </div>
+        <div className={styles.lowerInputDiv}>
+          <input
+            type="date"
+            value={dueDate}
+            onChange={(e) => {
+              setDueDate(e.target.value);
+            }}
+            className={styles.inputFormDate}
+          />
+          <select
+            value={priority}
+            name="priority"
+            className={styles.selectForm}
+            onChange={(e) => {
+              setPriority(e.target.value);
+            }}
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
       </form>
     </div>
   );

@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--primary-color);
+  border-bottom: 2px solid var(--button-backround-color);
 }
 
 .logo {
@@ -14,7 +14,7 @@
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  color: var(--primary-color);
+  color: var(--button-backround-color);
 }
 
 .button {
@@ -22,8 +22,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background-color: var(--primary-color);
-  color: #2a2630;
+  background-color: var(--button-backround-color);
   border: none;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -36,5 +35,12 @@
 }
 
 .button:hover {
-  background-color: #06a5fbc1;
+  background-color: var(--button-hover-color);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 500px) {
+  .smallButton {
+    background-color: blue;
+  }
 }
