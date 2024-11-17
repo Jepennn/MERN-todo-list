@@ -1,6 +1,6 @@
 .iconContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   margin: 0.5rem 0.2rem 0.7rem 0.2rem;
   color: var(--border-color);
@@ -19,19 +19,39 @@
 }
 /*---------------------------*/
 
+/* Due-date */
+.dueDateP {
+  font-size: 0.8rem;
+  margin-left: 0.8rem;
+}
+
+.dueDateSpan {
+  font-size: 0.8rem;
+}
+
+.dueDateExpiered {
+  color: red;
+}
+
+.dueDateTaskCompleted {
+  text-decoration: line-through;
+  color: var(--boarder-color);
+}
+/* Due-date end */
+
+/* Priority */
+.todoPriority {
+  font-size: 0.8rem;
+  margin-left: 0.8rem;
+}
+
+/* Trash-icon */
+.trashIcon {
+  margin-left: auto;
+}
+
 .trashIcon:hover {
   color: red;
   cursor: pointer;
 }
-
-.description {
-  flex-grow: 1;
-  color: var(--text-color);
-  padding: 0 0.5rem;
-  overflow: auto;
-}
-
-.descriptionCompleted {
-  text-decoration: line-through;
-  color: var(--border-color);
-}
+/* Trash-icon end */

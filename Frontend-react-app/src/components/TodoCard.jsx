@@ -3,14 +3,23 @@ import styles from "./TodoCard.module.css";
 import { useState } from "react";
 import TodoCardHeader from "./TodoCardHeader";
 
-function TodoCard({ todoBody, todoId, refreshTodoList, todoStatus }) {
-  const [isChecked, setIsChecked] = useState(todoStatus);
+function TodoCard({
+  todoBody,
+  todoId,
+  refreshTodoList,
+  todoStatus,
+  todoDueDate,
+  todoPriority,
+}) {
+  //State over todo completed or NOT
+  const [isCompleted, setIsCompleted] = useState(todoStatus);
 
-  function todoCompleted() {
-    async function todoStatus() {
+  //Function that handle/switches complete icon and store i the database
+  function handleTodoCompleted() {
+    async function changeTodoStatus() {
       try {
-        const newStatus = !isChecked; // Vänd det nuvarande värdet här
-        setIsChecked(newStatus);
+        const newStatus = !isCompleted; // Flips the completed state if
+        setIsCompleted(newStatus);
 
         const obj = {
           status: newStatus,
@@ -31,11 +40,11 @@ function TodoCard({ todoBody, todoId, refreshTodoList, todoStatus }) {
         console.log("Error", error);
       }
     }
-    todoStatus();
+    changeTodoStatus();
   }
 
-  //Funktion som raderar todoTask
-  function deleteTodo() {
+  //Function that deletes todoTask and remove i from the database
+  function handleDeleteTodo() {
     const deleteTodoFromDB = async () => {
       try {
         const response = await fetch(`http://localhost:3000/todos/${todoId}`, {
@@ -60,14 +69,16 @@ function TodoCard({ todoBody, todoId, refreshTodoList, todoStatus }) {
   return (
     <div className={styles.todoCard}>
       <TodoCardHeader
-        isChecked={isChecked}
-        todoCompleted={todoCompleted}
-        deleteTodo={deleteTodo}
+        isCompleted={isCompleted}
+        onTodoCompleted={handleTodoCompleted}
+        onDeleteTodo={handleDeleteTodo}
+        todoFinshedAtDate={todoDueDate}
+        todoPriority={todoPriority}
       />
       <p
-        className={`${styles.description} ${
-          isChecked ? styles.descriptionCompleted : ""
-        }`}
+        className={`
+          ${styles.description} 
+          ${isCompleted ? styles.descriptionCompleted : ""}`}
       >
         {todoBody}
       </p>
@@ -80,6 +91,8 @@ TodoCard.propTypes = {
   todoId: PropTypes.string.isRequired,
   refreshTodoList: PropTypes.func.isRequired,
   todoStatus: PropTypes.bool.isRequired,
+  todoDueDate: PropTypes.string,
+  todoPriority: PropTypes.string,
 };
 
 export default TodoCard;

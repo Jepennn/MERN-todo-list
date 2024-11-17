@@ -1,14 +1,16 @@
 import PropTypes from "prop-types";
 import styles from "./Modal.module.css";
 
-export default function Modal({ closeModal, children }) {
-  //Easy function that stops event to bubble up to overlay
+export default function Modal({ onCloseModal, children }) {
+  // Easy function that stops event to bubble up to overlay.
+  //Stops the modal to close when clicking det children that the
+  //Model show us.
   function stopBubblingEvent(e) {
     e.stopPropagation();
   }
 
   return (
-    <div onClick={closeModal} className={styles.overlay}>
+    <div onClick={onCloseModal} className={styles.overlay}>
       <div className={styles.modal} onClick={stopBubblingEvent}>
         {children}
       </div>
@@ -18,5 +20,5 @@ export default function Modal({ closeModal, children }) {
 
 Modal.propTypes = {
   children: PropTypes.node,
-  closeModal: PropTypes.func,
+  onCloseModal: PropTypes.func,
 };

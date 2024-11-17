@@ -16,22 +16,25 @@ function App() {
   /*-----------------------------------------------------------*/
 
   //Function that handels our Modal that contains our newTodo form
-  const modelToggler = () => {
+  const handleModelToggler = () => {
     setModalOpen(!isModalOpen);
   };
 
   return (
     <div className={styles.app}>
-      <MainHeader onNewPostClick={modelToggler} />
+      <MainHeader onNewPostClick={handleModelToggler} />
       {isModalOpen ? (
-        <Modal closeModal={modelToggler}>
+        <Modal onCloseModal={handleModelToggler}>
           <NewTodo refreshTodoList={refreshTodoList} />
         </Modal>
       ) : (
         ""
       )}
 
-      <TodoCardList updateFlag={updateFlag} refreshTodoList={refreshTodoList} />
+      <TodoCardList
+        updateFlag={updateFlag}
+        reRenderTodoList={refreshTodoList}
+      />
     </div>
   );
 }

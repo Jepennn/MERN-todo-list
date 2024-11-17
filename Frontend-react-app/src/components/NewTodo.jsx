@@ -61,6 +61,7 @@ function NewTodo({ refreshTodoList }) {
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.upperInputDiv}>
           <input
+            required
             type="text"
             placeholder="Add your todo"
             value={task}
@@ -73,6 +74,7 @@ function NewTodo({ refreshTodoList }) {
         </div>
         <div className={styles.lowerInputDiv}>
           <input
+            required
             type="date"
             value={dueDate}
             onChange={(e) => {
@@ -81,6 +83,7 @@ function NewTodo({ refreshTodoList }) {
             className={styles.inputFormDate}
           />
           <select
+            required
             value={priority}
             name="priority"
             className={styles.selectForm}
