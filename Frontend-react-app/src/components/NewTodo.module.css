@@ -5,7 +5,8 @@
 }
 
 .form {
-  max-width: 375px;
+  /* max-width: 375px; */
+  width: 500px;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -54,4 +55,16 @@
   background-color: var(--button-hover-color);
   transform: translateY(-2px);
   cursor: pointer;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column; /* Lägg label ovanför input */
+  margin-bottom: 15px; /* Ge avstånd mellan grupperna */
+}
+
+.labelForm {
+  font-weight: bold; /* Gör labeln tydligare */
+  margin: 0 0 5px 15px;
+  font-size: 0.9rem;
 }

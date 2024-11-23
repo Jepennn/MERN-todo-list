@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import styles from "./TodoCard.module.css";
-import { useState } from "react";
 import TodoCardHeader from "./TodoCardHeader";
+import { useState, useRef, useEffect } from "react";
 
 function TodoCard({
   todoBody,
@@ -11,8 +11,45 @@ function TodoCard({
   todoDueDate,
   todoPriority,
 }) {
-  //State over todo completed or NOT
+  //State over todo completed/ not completed
   const [isCompleted, setIsCompleted] = useState(todoStatus);
+  const [isEditingTodo, setIsEditingTodo] = useState(false);
+  const [newTodoBody, setNewTodoBody] = useState(todoBody);
+  const inputRef = useRef(null); // Referens till input-elementet som används vid redigering av todo
+
+  // Function that focuses the input field when the component is rendered
+  useEffect(() => {
+    if (isEditingTodo && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isEditingTodo]);
+
+  // Function that handles the change of the edited todo
+  function handleEditChange(e) {
+    setNewTodoBody(e.target.value);
+  }
+
+  // Function that handles the save of the edited todo
+  async function handleSaveEdit() {
+    try {
+      const response = await fetch(`http://localhost:3000/todos/${todoId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ body: newTodoBody }), // Uppdatera body i databasen
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update todo in the database");
+      }
+
+      setIsEditingTodo(false); // Stäng redigeringsläget
+      refreshTodoList(); // Uppdatera listan
+    } catch (error) {
+      console.error("Error updating todo:", error);
+    }
+  }
 
   //Function that handle/switches complete icon and store i the database
   function handleTodoCompleted() {
@@ -75,13 +112,28 @@ function TodoCard({
         todoFinshedAtDate={todoDueDate}
         todoPriority={todoPriority}
       />
-      <p
-        className={`
-          ${styles.description} 
-          ${isCompleted ? styles.descriptionCompleted : ""}`}
-      >
-        {todoBody}
-      </p>
+      {isEditingTodo ? ( // Om redigeringsläge
+        <input
+          ref={inputRef}
+          type="text"
+          value={newTodoBody}
+          onChange={handleEditChange}
+          onBlur={handleSaveEdit} // Spara ändring vid förlust av fokus
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSaveEdit(); // Spara ändring vid Enter
+          }}
+          className={styles.editInput}
+        />
+      ) : (
+        <p
+          className={`
+            ${styles.description} 
+            ${isCompleted ? styles.descriptionCompleted : ""}`}
+          onClick={() => setIsEditingTodo(true)} // Gå till redigeringsläge vid klick
+        >
+          {newTodoBody} {/* Visa `newTodoBody` */}
+        </p>
+      )}
     </div>
   );
 }

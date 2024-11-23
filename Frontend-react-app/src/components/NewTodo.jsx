@@ -61,6 +61,7 @@ function NewTodo({ refreshTodoList }) {
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.upperInputDiv}>
           <input
+            name="task"
             required
             type="text"
             placeholder="Add your todo"
@@ -73,28 +74,37 @@ function NewTodo({ refreshTodoList }) {
           </button>
         </div>
         <div className={styles.lowerInputDiv}>
-          <input
-            required
-            type="date"
-            value={dueDate}
-            onChange={(e) => {
-              setDueDate(e.target.value);
-            }}
-            className={styles.inputFormDate}
-          />
-          <select
-            required
-            value={priority}
-            name="priority"
-            className={styles.selectForm}
-            onChange={(e) => {
-              setPriority(e.target.value);
-            }}
-          >
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
+          <div className={styles.inputGroup}>
+            <label htmlFor="dueDate" className={styles.labelForm}>
+              Due date:
+            </label>
+            <input
+              id="dueDate"
+              name="dueDate"
+              required
+              type="date"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
+              className={styles.inputFormDate}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="priority" className={styles.labelForm}>
+              Priority:
+            </label>
+            <select
+              id="priority"
+              required
+              value={priority}
+              name="priority"
+              className={styles.selectForm}
+              onChange={(e) => setPriority(e.target.value)}
+            >
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
         </div>
       </form>
     </div>

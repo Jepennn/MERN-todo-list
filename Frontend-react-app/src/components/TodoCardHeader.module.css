@@ -34,7 +34,6 @@
 }
 
 .dueDateTaskCompleted {
-  text-decoration: line-through;
   color: var(--boarder-color);
 }
 /* Due-date end */

@@ -15,14 +15,13 @@ function TodoCardList({ updateFlag, reRenderTodoList }) {
         const response = await fetch("http://localhost:3000/todos");
         const data = await response.json();
         setTodos(data);
-        console.log(data);
       } catch (error) {
         console.error("Error fetching todos:", error);
       }
     };
 
     fetchTodos();
-  }, [updateFlag]); //Update flag är ett state som uppdateras i NewTodo-komponenten när en ny todo skapas
+  }, [updateFlag]); //Update flag är ett state som uppdateras i NewTodo-komponenten när en ny todo skapas,
 
   //Builds our list of todos with array rerendering
   return (

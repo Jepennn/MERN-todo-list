@@ -10,7 +10,7 @@ function TodoCardHeader({
   todoFinshedAtDate,
   todoPriority,
 }) {
-  //Set priority symbol
+  //Set priority symbol (red, yellow, green) based on the priority of the todo
   let priorityElement = null;
   if (todoPriority === "Low") {
     priorityElement = <FaCircle style={{ color: "green" }} />;
@@ -42,7 +42,9 @@ function TodoCardHeader({
           {todoFinshedAtDate.split("T")[0]}
         </span>
       </p>
-      <span className={styles.todoPriority}>Priority: {priorityElement}</span>
+      <span className={styles.todoPriority}>
+        Priority: {isCompleted ? "Task finshed" : priorityElement}
+      </span>
       <FaTrashAlt
         size={15}
         className={`${styles.icon} ${styles.trashIcon}`}
