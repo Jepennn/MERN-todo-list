@@ -8,6 +8,12 @@ import {
   updateTodo,
   deleteTodo,
 } from "./controller/todos.controller.js";
+import {
+  signUp_get,
+  signedUp_post,
+  login_get,
+  login_post,
+} from "./controller/auth.controller.js";
 
 dotenv.config(); //load env variables
 
@@ -32,6 +38,7 @@ app.get("/", (req, res) => {
   res.redirect("/todos");
 });
 
+/*ROUTES OVER TODOS */
 //Done
 app.get("/todos", getTodos);
 //Done
@@ -40,3 +47,12 @@ app.post("/todos", createTodo);
 app.put("/todos/:id", updateTodo);
 //Done
 app.delete("/todos/:id", deleteTodo);
+
+/*ROUTES OVER INLOGG */
+app.get("/signup", signUp_get);
+app.post("/signup", signedUp_post);
+
+app.get("/login", login_get);
+app.post("/login", login_post);
+
+// app.post();
