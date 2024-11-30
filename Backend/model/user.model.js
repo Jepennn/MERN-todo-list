@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true } // Adds createdAt och updatedAt
 );
 
-//Fires a function befores doc get saved to DB
+//Mongo DB middleware function that fires before a doc get saved to DB
 userSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);

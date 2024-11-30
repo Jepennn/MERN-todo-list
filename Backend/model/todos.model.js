@@ -2,6 +2,8 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
+//Schema over Todos that get stored in out DB
+
 const todoSchema = new Schema(
   {
     body: {

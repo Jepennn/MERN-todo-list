@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { Todo } from "../model/todos.model.js";
 
 // In the controller, we will define the functions that will be used in the routes.
