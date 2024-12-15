@@ -10,7 +10,6 @@ const getTodos = async (req, res) => {
 
   try {
     const todos = await Todo.find({ userId }); // Hämta endast todos för inloggad användare
-    console.log("Todos fetched successfully", todos);
     res.status(200).json({ success: true, data: todos });
   } catch (error) {
     console.error("Error fetching todos", error);
