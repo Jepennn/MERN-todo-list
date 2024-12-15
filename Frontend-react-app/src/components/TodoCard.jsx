@@ -34,6 +34,7 @@ function TodoCard({
     try {
       const response = await fetch(`http://localhost:3000/todos/${todoId}`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -64,6 +65,7 @@ function TodoCard({
 
         const response = await fetch(`http://localhost:3000/todos/${todoId}`, {
           method: "PUT",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -85,7 +87,11 @@ function TodoCard({
     const deleteTodoFromDB = async () => {
       try {
         const response = await fetch(`http://localhost:3000/todos/${todoId}`, {
+          credentials: "include",
           method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
 
         //För att hamna i catch-blocket vid fel

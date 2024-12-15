@@ -1,7 +1,7 @@
-.gridContainer {
+.todoContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin: 60px;
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  justify-content: center;
+  align-items: flex-start;
 }

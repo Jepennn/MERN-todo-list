@@ -28,6 +28,11 @@ const todoSchema = new Schema(
       enum: ["Low", "Medium", "High"],
       default: "medium",
     },
+    userId: {
+      type: Schema.Types.ObjectId, // Referens till User-collection
+      ref: "User", // Namnet på User-modellen som du har skapat
+      required: true, // Varje todo måste vara kopplad till en användare
+    },
   },
   {
     timestamps: true,

@@ -1,7 +1,7 @@
 .header {
   padding: 2rem 10%;
   margin: 2rem 10%;
-  padding: 1rem;
+  padding: 0.8rem;
   text-align: center;
   display: flex;
   justify-content: space-between;
@@ -9,38 +9,29 @@
   border-bottom: 2px solid var(--button-backround-color);
 }
 
-.logo {
-  font-size: 2rem;
+.leftHeadingContainer {
   display: flex;
-  gap: 1.5rem;
-  align-items: center;
+  flex-direction: row;
   color: var(--button-backround-color);
 }
 
-.button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background-color: var(--button-backround-color);
-  border: none;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+.leftHeadingContainer h1 {
+  margin-left: 10px;
+}
+
+.rightHeadingContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.rightHeadingContainer svg {
+  color: var(--button-backround-color);
   cursor: pointer;
-  font-weight: bold;
+  transition: ease-out 0.3s;
 }
 
-.addIcon {
-  color: var(--background-color);
-}
-
-.button:hover {
-  background-color: var(--button-hover-color);
-  transform: translateY(-2px);
-}
-
-@media (max-width: 500px) {
-  .smallButton {
-    background-color: blue;
-  }
+.rightHeadingContainer svg:hover {
+  color: var(--button-hover-color);
+  transform: scale(1.2);
 }

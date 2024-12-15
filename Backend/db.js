@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-dotenv.config(); //load env variables
+dotenv.config(); //load env variables from which is API keys and other secrets
 
 //async function to connect to the database
 const connectDB = async () => {

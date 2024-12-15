@@ -1,7 +1,7 @@
 import styles from "./NewTodo.module.css";
 import { useState } from "react";
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 function NewTodo({ refreshTodoList }) {
   const [task, setTask] = useState("");
   const [dueDate, setDueDate] = useState("");
@@ -26,13 +26,12 @@ function NewTodo({ refreshTodoList }) {
       priority: priority,
     };
 
-    console.log(todoObject);
-
     //Funktion som skickar todoObject till databasen
     const sendTodoToDB = async () => {
       try {
         const response = await fetch("http://localhost:3000/todos", {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -57,57 +56,58 @@ function NewTodo({ refreshTodoList }) {
   };
 
   return (
-    <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.upperInputDiv}>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.topBar}>
+        <Link to={"/todos"}>X</Link>
+      </div>
+      <div className={styles.upperInputDiv}>
+        <input
+          name="task"
+          required
+          type="text"
+          placeholder="Add your todo"
+          value={task}
+          className={styles.inputFormText}
+          onChange={(e) => setTask(e.target.value)}
+        />
+        <button className={styles.buttonForm}>
+          <h4>ADD</h4>
+        </button>
+      </div>
+      <div className={styles.lowerInputDiv}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="dueDate" className={styles.labelForm}>
+            Due date:
+          </label>
           <input
-            name="task"
+            id="dueDate"
+            name="dueDate"
             required
-            type="text"
-            placeholder="Add your todo"
-            value={task}
-            className={styles.inputFormText}
-            onChange={(e) => setTask(e.target.value)}
+            type="date"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+            className={styles.inputFormDate}
           />
-          <button className={styles.buttonForm}>
-            <h4>ADD</h4>
-          </button>
         </div>
-        <div className={styles.lowerInputDiv}>
-          <div className={styles.inputGroup}>
-            <label htmlFor="dueDate" className={styles.labelForm}>
-              Due date:
-            </label>
-            <input
-              id="dueDate"
-              name="dueDate"
-              required
-              type="date"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
-              className={styles.inputFormDate}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label htmlFor="priority" className={styles.labelForm}>
-              Priority:
-            </label>
-            <select
-              id="priority"
-              required
-              value={priority}
-              name="priority"
-              className={styles.selectForm}
-              onChange={(e) => setPriority(e.target.value)}
-            >
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </select>
-          </div>
+        <div className={styles.inputGroup}>
+          <label htmlFor="priority" className={styles.labelForm}>
+            Priority:
+          </label>
+          <select
+            id="priority"
+            required
+            value={priority}
+            name="priority"
+            className={styles.selectForm}
+            onChange={(e) => setPriority(e.target.value)}
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }
 

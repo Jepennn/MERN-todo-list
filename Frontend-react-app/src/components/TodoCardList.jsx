@@ -12,9 +12,15 @@ function TodoCardList({ updateFlag, reRenderTodoList }) {
     //Function used to fetch all Todos from DB
     const fetchTodos = async () => {
       try {
-        const response = await fetch("http://localhost:3000/todos");
-        const data = await response.json();
-        setTodos(data);
+        const response = await fetch("http://localhost:3000/todos", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const res = await response.json();
+        setTodos(res.data);
       } catch (error) {
         console.error("Error fetching todos:", error);
       }
@@ -25,7 +31,7 @@ function TodoCardList({ updateFlag, reRenderTodoList }) {
 
   //Builds our list of todos with array rerendering
   return (
-    <div className={styles.gridContainer}>
+    <div className={styles.todoContainer}>
       {todos.map((todo) => (
         <TodoCard
           key={todo._id}

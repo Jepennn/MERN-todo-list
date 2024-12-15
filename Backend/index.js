@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./db.js";
@@ -9,24 +10,46 @@ import {
   deleteTodo,
 } from "./controller/todos.controller.js";
 import {
-  signUp_get,
   signedUp_post,
-  login_get,
   login_post,
+  logout_get,
 } from "./controller/auth.controller.js";
 
-dotenv.config(); //load env variables
+//Load environment variables so that they can be used in the application
+dotenv.config();
 
 const app = express();
-app.use(express.json()); //middleware to parse json data so that it can be used in the req.body
-app.use(cors()); //middleware to allow cross-origin requests
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://your-production-frontend.com",
+];
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
+//Middleware functions that will run for every request so that the data can be used in the req.body
+app.use(express.json());
+app.use(cookieParser());
+
+//Import of middleware that checks if the user is logged in
+import { authMiddleware } from "./middleware/authMiddleware.js";
 
 const port = process.env.PORT || 3000;
 connectDB()
   .then(() => {
     //starts the server
     app.listen(port, () => {
-      console.log(`Server is running on port http://localhost:${port}`);
+      console.log(`Server is running on port http://localhost:${port} 
+      // ----------------------------------------------------------------//`);
     });
   })
   .catch((error) => {
@@ -34,25 +57,28 @@ connectDB()
   });
 
 /*Todo routes starts here*/
+
+//Redirect to /todos
 app.get("/", (req, res) => {
   res.redirect("/todos");
 });
 
 /*ROUTES OVER TODOS */
-//Done
-app.get("/todos", getTodos);
-//Done
-app.post("/todos", createTodo);
-//Done
-app.put("/todos/:id", updateTodo);
-//Done
-app.delete("/todos/:id", deleteTodo);
+app.get("/todos", authMiddleware, getTodos);
+app.post("/todos", authMiddleware, createTodo);
+app.put("/todos/:id", authMiddleware, updateTodo);
+app.delete("/todos/:id", authMiddleware, deleteTodo);
 
-/*ROUTES OVER INLOGG */
-app.get("/signup", signUp_get);
+/*ROUTES OVER AUTH*/
+// app.get("/signup", signUp_get);
 app.post("/signup", signedUp_post);
 
-app.get("/login", login_get);
+// app.get("/login", login_get);
 app.post("/login", login_post);
 
-// app.post();
+app.get("/logout", logout_get);
+
+/*ROUTES OVER CHECK AUTH */
+app.get("/check-auth", authMiddleware, (req, res) => {
+  res.status(200).json({ message: "Authenticated", user: req.user });
+});
