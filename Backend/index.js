@@ -22,6 +22,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "https://your-production-frontend.com",
+  "https://mern-todo-list-frontend-tau.vercel.app",
 ];
 app.use(
   cors({
