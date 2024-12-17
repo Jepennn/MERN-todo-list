@@ -3,11 +3,12 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("http://localhost:3000/check-auth", {
+        const response = await fetch(`${backendUrl}/check-auth`, {
           method: "GET",
           credentials: "include", // Skicka cookies för autentisering
         });

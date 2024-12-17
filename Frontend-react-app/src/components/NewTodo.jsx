@@ -6,6 +6,7 @@ function NewTodo({ refreshTodoList }) {
   const [task, setTask] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("Medium");
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +30,7 @@ function NewTodo({ refreshTodoList }) {
     //Funktion som skickar todoObject till databasen
     const sendTodoToDB = async () => {
       try {
-        const response = await fetch("http://localhost:3000/todos", {
+        const response = await fetch(`${backendUrl}/todos`, {
           method: "POST",
           credentials: "include",
           headers: {

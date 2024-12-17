@@ -6,13 +6,14 @@ import PropTypes from "prop-types";
 function TodoCardList({ updateFlag, reRenderTodoList }) {
   //Todos is all todos from DB
   const [todos, setTodos] = useState([]);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   // useEffect gets called after the first render an get all todos from the server
   useEffect(() => {
     //Function used to fetch all Todos from DB
     const fetchTodos = async () => {
       try {
-        const response = await fetch("http://localhost:3000/todos", {
+        const response = await fetch(`${backendUrl}/todos`, {
           method: "GET",
           credentials: "include",
           headers: {

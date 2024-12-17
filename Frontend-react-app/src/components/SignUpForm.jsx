@@ -7,6 +7,7 @@ export default function SignUpForm() {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const navigate = useNavigate();
 
@@ -51,7 +52,7 @@ export default function SignUpForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/signup", {
+      const response = await fetch(`${backendUrl}/signup`, {
         method: "POST",
         credentials: "include",
         headers: {

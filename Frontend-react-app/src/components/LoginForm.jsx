@@ -7,6 +7,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
 
   return (
@@ -60,7 +61,7 @@ export default function LoginForm() {
     setPasswordError("");
 
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch(`${backendUrl}/login`, {
         method: "POST",
         credentials: "include",
         headers: {

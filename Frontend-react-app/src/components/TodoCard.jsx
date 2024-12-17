@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import styles from "./TodoCard.module.css";
 import TodoCardHeader from "./TodoCardHeader";
 import { useState, useRef, useEffect } from "react";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 function TodoCard({
   todoBody,
@@ -32,7 +33,7 @@ function TodoCard({
   // Function that handles the save of the edited todo
   async function handleSaveEdit() {
     try {
-      const response = await fetch(`http://localhost:3000/todos/${todoId}`, {
+      const response = await fetch(`${backendUrl}/todos/${todoId}`, {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -63,7 +64,7 @@ function TodoCard({
           status: newStatus,
         };
 
-        const response = await fetch(`http://localhost:3000/todos/${todoId}`, {
+        const response = await fetch(`${backendUrl}/todos/${todoId}`, {
           method: "PUT",
           credentials: "include",
           headers: {
@@ -86,7 +87,7 @@ function TodoCard({
   function handleDeleteTodo() {
     const deleteTodoFromDB = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/todos/${todoId}`, {
+        const response = await fetch(`${backendUrl}/todos/${todoId}`, {
           credentials: "include",
           method: "DELETE",
           headers: {
