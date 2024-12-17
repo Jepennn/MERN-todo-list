@@ -23,6 +23,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://your-production-frontend.com",
   "https://mern-todo-list-frontend-tau.vercel.app",
+  "https://mern-todo-list-frontend-hn34f6x0h-jespers-projects-d7ce381a.vercel.app",
 ];
 app.use(
   cors({
